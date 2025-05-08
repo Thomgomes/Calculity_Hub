@@ -5,6 +5,7 @@ import Te from "../ui/te";
 
 const BasicCalculator: React.FC = () => {
   const [display, setDisplay] = useState("0");
+  const [expression, setExpression] = useState("");
   const [previousValue, setPreviousValue] = useState<string | null>(null);
   const [operation, setOperation] = useState<string | null>(null);
   const [waitingForOperand, setWaitingForOperand] = useState(false);
@@ -12,6 +13,7 @@ const BasicCalculator: React.FC = () => {
 
   const clearDisplay = () => {
     setDisplay("0");
+    setExpression("");
     setPreviousValue(null);
     setOperation(null);
     setWaitingForOperand(false);
@@ -24,26 +26,68 @@ const BasicCalculator: React.FC = () => {
     } else {
       setDisplay(display === "0" ? digit : display + digit);
     }
+
+    // Update expression when inputting digits
+    if (operation && waitingForOperand) {
+      setExpression(previousValue + " " + operation + " " + digit);
+    } else if (operation) {
+      setExpression(
+        previousValue +
+          " " +
+          operation +
+          " " +
+          (display === "0" ? digit : display + digit)
+      );
+    } else {
+      setExpression(display === "0" ? digit : display + digit);
+    }
   };
 
   const inputDecimal = () => {
     if (waitingForOperand) {
       setDisplay("0.");
+      setExpression(previousValue + " " + operation + " 0.");
       setWaitingForOperand(false);
     } else if (display.indexOf(".") === -1) {
       setDisplay(display + ".");
+      setExpression(expression + ".");
     }
   };
 
   const toggleSign = () => {
     const newValue = parseFloat(display) * -1;
     setDisplay(newValue.toString());
+
+    if (operation && waitingForOperand) {
+      // We're waiting for a new operand, so just update the expression
+      setExpression(previousValue + " " + operation + " ");
+    } else if (operation) {
+      // We're in the middle of entering a second operand
+      setExpression(
+        previousValue + " " + operation + " " + newValue.toString()
+      );
+    } else {
+      // We're just showing a single value
+      setExpression(newValue.toString());
+    }
   };
 
   const inputPercent = () => {
     const currentValue = parseFloat(display);
     const newValue = currentValue / 100;
     setDisplay(newValue.toString());
+
+    if (operation && waitingForOperand) {
+      setExpression(
+        previousValue + " " + operation + " " + newValue.toString()
+      );
+    } else if (operation) {
+      setExpression(
+        previousValue + " " + operation + " " + newValue.toString()
+      );
+    } else {
+      setExpression(newValue.toString());
+    }
   };
 
   const performOperation = (nextOperation: string | null) => {
@@ -51,6 +95,7 @@ const BasicCalculator: React.FC = () => {
 
     if (previousValue === null) {
       setPreviousValue(display);
+      setExpression(display + (nextOperation ? " " + nextOperation + " " : ""));
     } else if (operation) {
       const currentValue = parseFloat(previousValue);
       let newValue = 0;
@@ -73,9 +118,15 @@ const BasicCalculator: React.FC = () => {
       }
 
       const historyEntry = `${currentValue} ${operation} ${inputValue} = ${newValue}`;
-      setHistory((prev) => [historyEntry, ...prev.slice(0, 4)]);
+      setHistory((prev) => [historyEntry, ...prev.slice(0, 3)]);
+
       setPreviousValue(newValue.toString());
       setDisplay(newValue.toString());
+      setExpression(
+        nextOperation
+          ? newValue.toString() + " " + nextOperation + " "
+          : newValue.toString()
+      );
     }
 
     setWaitingForOperand(true);
@@ -85,6 +136,9 @@ const BasicCalculator: React.FC = () => {
   return (
     <Te cardClassName="w-full max-w-md mx-auto" Title="Calculadora Básica ">
       <div className="bg-button-basic p-4 rounded-lg shadow mb-4">
+        <div className="text-right text-gray-500 text-sm font-mono h-6">
+          {expression || "0"}
+        </div>
         <div className="text-right text-3xl font-mono">{display}</div>
       </div>
 
