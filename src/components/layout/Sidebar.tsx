@@ -74,14 +74,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCalculator, setActiveCalculator
   return (
     <aside 
       className={cn(
-        "bg-calculity-light shadow-xl transition-all duration-300 h-[calc(100vh-4rem)]",
-        isCollapsed ? "w-16" : "w-64"
+        "bg-button-basic shadow-xl transition-all duration-300 h-[calc(100vh-4rem)]",
+        isCollapsed ? "w-18" : "w-64"
       )}
     >
       <div className="p-4 flex justify-end">
         <button 
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1 rounded-md hover:bg-primary hover:text-white"
+          className="p-1 rounded-md hover:bg-primary hover:text-primary-foreground"
         >
           {isCollapsed ? '>>' : '<<'}
         </button>
@@ -95,15 +95,15 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCalculator, setActiveCalculator
                 className={cn(
                   "w-full text-left px-3 py-2 rounded-md flex items-center gap-3 transition-colors",
                   activeCalculator === option.id
-                    ? "bg-gradient-to-r from-calculity-gradient-start via-calculity-gradient-mid to-calculity-gradient-end text-white"
-                    : "hover:bg-calculity-light"
+                    ? "bg-primary text-primary-foreground"
+                    : "hover:bg-primary/80"
                 )}
               >
                 <div className={cn(
                   "p-1.5 rounded-md",
                   activeCalculator === option.id
-                    ? "text-white"
-                    : "bg-gradient-to-br from-calculity-gradient-start to-calculity-gradient-end text-white"
+                    ? "text-primary-foreground"
+                    : "bg-primary text-primary-foreground"
                 )}>
                   {option.icon}
                 </div>
