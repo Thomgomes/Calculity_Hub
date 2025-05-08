@@ -8,7 +8,9 @@
   --color-primary-foreground: #ffffff;
   
   --color-secundary: #5C98F1;
-  --color-secondary-foreground: #1c1a15;
+  --color-secondary-foreground: #ffffff;
+
+  --color-um-preto: #1c1a15;
 
   --color-card: #ffffff;
   --color-card-foreground: #0f0c08;
@@ -22,10 +24,10 @@
   --color-button-basic: #f5f8ff;
   --color-button-basic-marked: #727a8a;
   
-  --color-accent: #ffa500;
+  --color-accent: #9ce4ff;
   --color-accent-foreground: #1c1a15;
 
-  --color-destructive: #ef4444;
+  --color-destructive: #df5636;
   --color-destructive-foreground: #f9fbfd;
 
   --color-border: #9ce4ff;
