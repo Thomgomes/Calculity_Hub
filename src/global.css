@@ -4,10 +4,10 @@
   --color-background: #f9fafb;
   --color-background-foreground: #060a16;
 
-  --color-primary: #5C98F1;
+  --color-primary: #36b1df;
   --color-primary-foreground: #ffffff;
-
-  --color-secondary: #3b8eff;
+  
+  --color-secundary: #5C98F1;
   --color-secondary-foreground: #1c1a15;
 
   --color-card: #ffffff;
@@ -28,7 +28,9 @@
   --color-destructive: #ef4444;
   --color-destructive-foreground: #f9fbfd;
 
-  --color-border: #e5eaf3;
+  --color-border: #9ce4ff;
+  --color-border-outside: #c4efff;
+
   --color-input: #e5eaf3;
   --color-ring: #2954c6;
 
