@@ -74,14 +74,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCalculator, setActiveCalculator
   return (
     <aside 
       className={cn(
-        "bg-button-basic shadow-xl transition-all duration-300 h-[calc(100vh-4rem)]",
+        "fixed left-0 bg-button-basic shadow-xl transition-all duration-300 h-[calc(100vh-4rem)]",
         isCollapsed ? "w-18" : "w-64"
       )}
     >
       <div className="p-4 flex justify-end">
         <button 
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1 rounded-md hover:bg-primary hover:text-primary-foreground"
+          className="p-1 rounded-md hover:bg-primary hover:text-primary-foreground hover:cursor-pointer"
         >
           {isCollapsed ? '>>' : '<<'}
         </button>
@@ -96,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCalculator, setActiveCalculator
                   "w-full text-left px-3 py-2 rounded-md flex items-center gap-3 transition-colors",
                   activeCalculator === option.id
                     ? "bg-primary text-primary-foreground"
-                    : "hover:bg-primary/80"
+                    : "hover:bg-primary/80 hover:cursor-pointer"
                 )}
               >
                 <div className={cn(
