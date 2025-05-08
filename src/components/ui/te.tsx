@@ -31,11 +31,11 @@ const Te: React.FC<CardProps> = ({
       {/* Wrapper com efeito de fundo */}
       <div className="relative w-full max-w-md mx-auto">
         {/* Borda azul deslocada */}
-        <div className="absolute top-1 left-1 w-full h-full rounded-lg border border-blue-200 bg-blue-50 z-[1]"></div>
+        <div className="absolute top-2 left-2 w-full h-full rounded-lg bg-border-outside z-[1]"></div>
         {/* Card */}
         <div
           className={cn(
-            "relative rounded-lg border bg-card text-card-foreground shadow-sm z-[2]",
+            "relative rounded-lg border border-border bg-card text-card-foreground shadow-sm z-[2]",
             cardClassName
           )}
           {...cardProps}
